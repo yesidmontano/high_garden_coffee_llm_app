@@ -34,8 +34,8 @@ else:
 
 
 st.set_page_config(
-    page_title="RAG LLM app?", 
-    page_icon="📚", 
+    page_title="AI Assistant Analyst", 
+    page_icon="🤖", 
     layout="centered", 
     initial_sidebar_state="expanded"
 )
@@ -55,7 +55,7 @@ if "rag_sources" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "user", "content": "Hola!"},
-        {"role": "assistant", "content": "Hola! ¿En qué puedo ayudarte hoy? (ej. ¿Qué tipos de café comercializamos? ¿Cuál es el ratio de crecimiento por año del tipo de café Mixta desde 2010 a 2020? ¿Cuál es el volumen estimado del top 5 de países para 2021?)"}
+        {"role": "assistant", "content": "Hola! ¿En qué puedo ayudarte hoy? (ej. ¿Qué tipos de café comercializamos? ¿Cuál es el consumo promedio anual del café Mixta de 2015 a 2020? ¿Cuál es el ratio de crecimiento anual esperado?)"}
 ]
 
 with st.sidebar:
@@ -160,7 +160,7 @@ else:
     elif model_provider == "azure-openai":
         llm_stream = AzureChatOpenAI(
             azure_endpoint=os.getenv("AZ_OPENAI_ENDPOINT"),
-            openai_api_version="2024-02-15-preview",
+            openai_api_version="2024-12-01-preview",
             model_name=st.session_state.model.split("/")[-1],
             openai_api_key=os.getenv("AZ_OPENAI_API_KEY"),
             openai_api_type="azure",

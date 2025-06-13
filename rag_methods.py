@@ -15,6 +15,7 @@ from contextlib import redirect_stdout, redirect_stderr
 
 from langchain_community.document_loaders.text import TextLoader
 from langchain_community.document_loaders import (
+    JSONLoader,
     CSVLoader,
     WebBaseLoader, 
     PyPDFLoader, 
@@ -403,7 +404,7 @@ def initialize_vector_db(docs):
             api_key=os.getenv("AZ_OPENAI_API_KEY"), 
             azure_endpoint=os.getenv("AZ_OPENAI_ENDPOINT"),
             model="text-embedding-3-large",
-            openai_api_version="2024-02-15-preview",
+            openai_api_version="2024-12-01-preview",
         )
 
     vector_db = Chroma.from_documents(
@@ -547,7 +548,7 @@ def get_conversational_rag_chain_with_python_tools(llm):
     **Response Guidelines:**
     1. **Extract Data**: Always extract relevant numerical data from the retrieved context
     2. **Write Python Code**: Use Python tools for ALL calculations and analysis
-    3. **Present Results**: Format the Python results in a business-friendly manner
+    3. **Present Results**: Format the Python results in a business-friendly manner. Take into account that the data is in kg (not units), you can convert it to tons by dividing by 1000.
     4. **Accuracy First**: Never guess or estimate - always calculate
     5. **Context-Driven**: Base all analysis on the retrieved data context
     6. **Business Focus**: Frame results in terms of business implications for High Garden Coffee
@@ -597,7 +598,7 @@ def stream_llm_rag_response_with_python_tools(llm_stream, messages):
         yield result["output"]
         
     except Exception as e:
-        error_msg = f"Error in Python analysis execution: {str(e)}"
+        error_msg = "He tenido inconveniente al intentar responder esta pregunta, puedes reformularla o hacerla más específica."#f"Error in Python analysis execution: {str(e)}"
         response_message += error_msg
         yield error_msg
 
