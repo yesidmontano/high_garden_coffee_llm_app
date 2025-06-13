@@ -15,11 +15,9 @@ from contextlib import redirect_stdout, redirect_stderr
 
 from langchain_community.document_loaders.text import TextLoader
 from langchain_community.document_loaders import (
-    JSONLoader,
     CSVLoader,
     WebBaseLoader, 
-    PyPDFLoader, 
-    Docx2txtLoader,
+    PyPDFLoader
 )
 # pip install docx2txt, pypdf
 from langchain_community.vectorstores import Chroma
